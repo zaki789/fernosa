@@ -464,8 +464,8 @@ add_action('woocommerce_admin_order_data_after_billing_address', function($order
 
 add_action('wp_enqueue_scripts', function(){
 	if ( function_exists('is_checkout') && is_checkout() && fg_bool_opt('enable_map', get_theme_mod('fg_enable_map', true)) ) {
-		wp_enqueue_style('fg-leaflet', get_template_directory_uri() . '/assets/leaflet/leaflet.css', array(), fg_asset_version('/assets/leaflet/leaflet.css'));
-		wp_enqueue_script('fg-leaflet', get_template_directory_uri() . '/assets/leaflet/leaflet.js', array(), fg_asset_version('/assets/leaflet/leaflet.js'), true);
+		wp_enqueue_style('fg-leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', array(), '1.9.4');
+		wp_enqueue_script('fg-leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), '1.9.4', true);
 		wp_enqueue_style('fg-checkout-map', get_template_directory_uri() . '/assets/css/fg-checkout-map.css', array(), fg_asset_version('/assets/css/fg-checkout-map.css'));
 		wp_enqueue_script('fg-checkout-map', get_template_directory_uri() . '/assets/js/fg-checkout-map.js', array('fg-leaflet'), fg_asset_version('/assets/js/fg-checkout-map.js'), true);
 		wp_localize_script('fg-checkout-map', 'FG_DELIVERY', array(
