@@ -5,7 +5,7 @@
  */
 if (!defined('ABSPATH')) { exit; }
 
-define('FERNOSA_GELATO_VERSION', '1.0.9');
+define('FERNOSA_GELATO_VERSION', '1.0.10');
 define('FERNOSA_GELATO_DIR', get_template_directory());
 define('FERNOSA_GELATO_URI', get_template_directory_uri());
 
