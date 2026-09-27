@@ -1,0 +1,164 @@
+
+/* Fernosa WooCommerce polish: RTL, Persian headings, better CTA feel */
+:root{
+  --fg-surface: rgba(255,255,255,.06);
+  --fg-surface-2: rgba(255,255,255,.09);
+  --fg-border: rgba(255,255,255,.12);
+  --fg-glow: rgba(152,140,117,.35);
+  --fg-accent: #988c75;
+  --fg-accent-2: #013a17;
+  --fg-text: #f8f0e2;
+}
+
+.woocommerce-cart .woocommerce,
+.woocommerce-checkout .woocommerce{
+  direction: rtl;
+}
+
+.woocommerce .woocommerce-notices-wrapper,
+.woocommerce .woocommerce-error,
+.woocommerce .woocommerce-message,
+.woocommerce .woocommerce-info{
+  border-radius: 16px;
+  background: var(--fg-surface);
+  border: 1px solid var(--fg-border);
+  backdrop-filter: blur(14px);
+}
+
+/* Coupon block */
+.fg-checkout-coupon{
+  margin: 0 0 16px 0;
+  border-radius: 18px;
+  background: var(--fg-surface);
+  border: 1px dashed var(--fg-border);
+  padding: 12px 14px;
+  backdrop-filter: blur(14px);
+}
+.fg-coupon-toggle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  justify-content: space-between;
+  color: var(--fg-text);
+}
+.fg-coupon-toggle i{ color: var(--fg-accent); }
+.fg-coupon-btn{
+  border-radius: 14px !important;
+  border: 1px solid rgba(152,140,117,.45) !important;
+  background: linear-gradient(180deg, rgba(152,140,117,.25), rgba(152,140,117,.10)) !important;
+  color: var(--fg-text) !important;
+  padding: 8px 12px !important;
+}
+.fg-checkout-coupon .checkout_coupon{
+  margin-top: 12px;
+}
+.fg-checkout-coupon input.input-text{
+  width: 100%;
+  border-radius: 14px !important;
+  background: rgba(0,0,0,.22) !important;
+  border: 1px solid var(--fg-border) !important;
+  color: var(--fg-text) !important;
+  padding: 10px 12px !important;
+}
+.fg-checkout-coupon button.button{
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, rgba(1,58,23,.7), rgba(1,58,23,.35)) !important;
+  border: 1px solid rgba(1,58,23,.55) !important;
+  color: #fff !important;
+  padding: 10px 14px !important;
+}
+
+/* Cart totals title */
+.fg-cart-title, .woocommerce-checkout h3, .woocommerce-checkout h2{
+  color: var(--fg-text);
+  margin: 0 0 12px 0;
+}
+
+/* Tables */
+.woocommerce table.shop_table{
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--fg-surface);
+  border: 1px solid var(--fg-border);
+}
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td{
+  border-color: rgba(255,255,255,.08) !important;
+  color: var(--fg-text);
+}
+.woocommerce table.shop_table tr{
+  background: transparent;
+}
+
+/* Primary CTA buttons */
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt,
+.woocommerce .checkout-button{
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, rgba(152,140,117,.55), rgba(152,140,117,.18)) !important;
+  border: 1px solid rgba(152,140,117,.55) !important;
+  color: var(--fg-text) !important;
+  box-shadow: 0 10px 30px rgba(152,140,117,.15);
+}
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce .checkout-button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 36px rgba(152,140,117,.22);
+}
+
+/* Inputs */
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea{
+  border-radius: 14px !important;
+  background: rgba(0,0,0,.22) !important;
+  border: 1px solid var(--fg-border) !important;
+  color: var(--fg-text) !important;
+}
+.woocommerce form .form-row label{
+  color: var(--fg-text) !important;
+}
+
+/* Make checkout two columns breathe */
+@media (min-width: 992px){
+  .woocommerce-checkout .col2-set{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* Hide duplicate default coupon notice (we render our own) */
+.woocommerce-form-coupon-toggle,
+.woocommerce-info.woocommerce-coupon-message{
+  display:none !important;
+}
+
+
+/* Order info box */
+.fg-order-info-box{
+  margin: 0 0 14px 0;
+  border-radius: 18px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(14px);
+  padding: 12px 14px;
+  color: rgba(248,240,226,.86);
+}
+.fg-order-info-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 800;
+  color: #f8f0e2;
+  margin-bottom: 8px;
+}
+.fg-order-info-title i{ color: #988c75; }
+.fg-order-info-row{
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: rgba(248,240,226,.82);
+}
+
+.fg-order-info-title .fa-star{ color:#988c75; }

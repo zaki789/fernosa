@@ -1,0 +1,22 @@
+# WordPress
+wp-config.php
+*.log
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

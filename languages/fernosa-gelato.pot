@@ -1,0 +1,1 @@
+# Placeholder POT. Generate properly with WP-CLI or Poedit.
