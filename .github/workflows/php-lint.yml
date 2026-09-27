@@ -1,0 +1,27 @@
+name: PHP Lint
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  php-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+      - name: PHP syntax check
+        shell: bash
+        run: |
+          set -euo pipefail
+          status=0
+          while IFS= read -r -d '' file; do
+            echo "Linting $file"
+            php -l "$file" || status=1
+          done < <(find . -type f -name '*.php' -not -path './vendor/*' -print0)
+          exit "$status"
