@@ -831,7 +831,7 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
 
 /* Fernosa final homepage UI */
 .section-kicker{display:block;margin-bottom:6px;color:var(--secondary-color,#988c75);font-size:11px;font-weight:900;letter-spacing:.14em}
-.fg-intro-video{position:relative;min-height:100svh;overflow:hidden;background:#013a17}
+.fg-intro-video{position:fixed;inset:0;z-index:99999;min-height:100svh;overflow:hidden;background:#013a17}
 .fg-intro-video__media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .fg-intro-video__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,58,23,.08),rgba(1,58,23,.78))}
 .fg-intro-video__content{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding-bottom:12vh}
@@ -849,6 +849,7 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
 
 /* Intro video is a mobile entry experience; desktop keeps the static hero. */
 .fg-intro-video{display:none}
+.fg-intro-video.is-done{display:none}
 @media (max-width:767px){
   .fg-intro-video{display:block}
 }
