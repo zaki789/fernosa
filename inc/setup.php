@@ -102,25 +102,6 @@ add_action('customize_register', function($wp_customize){
     ]));
 
     
-    $wp_customize->add_setting('fernosa_header_bg', [
-        'default' => '#013a17',
-        'sanitize_callback' => 'sanitize_hex_color',
-    ]);
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'fernosa_header_bg', [
-        'label' => __('رنگ پس‌زمینه هدر', 'fernosa-gelato'),
-        'section' => 'fernosa_colors',
-        'settings' => 'fernosa_header_bg',
-    ]));
-
-    $wp_customize->add_setting('fernosa_header_bg_scrolled', [
-        'default' => '#013a17',
-        'sanitize_callback' => 'sanitize_hex_color',
-    ]);
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'fernosa_header_bg_scrolled', [
-        'label' => __('رنگ هدر هنگام اسکرول', 'fernosa-gelato'),
-        'section' => 'fernosa_colors',
-        'settings' => 'fernosa_header_bg_scrolled',
-    ]));
 
     $wp_customize->add_setting('fernosa_header_link', [
         'default' => '#ffffff',
