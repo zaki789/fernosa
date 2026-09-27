@@ -54,7 +54,7 @@ if (!defined('ABSPATH')) { exit; }
         <?php endif; ?>
       <?php endif; ?>
 
-      <button class="icon-btn hamburger"/> id="hamburgerBtn" aria-label="<?php esc_attr_e('Open menu', 'fernosa-gelato'); ?>">
+      <button class="icon-btn hamburger" id="hamburgerBtn" aria-label="<?php esc_attr_e('Open menu', 'fernosa-gelato'); ?>">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
