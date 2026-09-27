@@ -7,6 +7,12 @@
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('mobileDrawer');
   const closeBtn = document.getElementById('closeDrawerBtn');
+  const introVideo = document.querySelector('.fg-intro-video__media');
+  const introSkip = document.querySelector('.fg-intro-video__skip');
+  if (introVideo) {
+    introVideo.addEventListener('ended', () => document.querySelector('.fg-intro-video')?.classList.add('is-done'), { once:true });
+  }
+  if (introSkip) introSkip.addEventListener('click', () => document.querySelector('.fg-intro-video')?.remove());
 
   const onScroll = () => {
     if (!header) return;
