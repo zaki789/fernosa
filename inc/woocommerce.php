@@ -79,7 +79,6 @@ add_filter('woocommerce_checkout_fields', function ($fields) {
 
 
 // Disable shipping address section + order notes UI.
-add_filter('woocommerce_cart_needs_shipping_address', '__return_false', 20);
 add_filter('woocommerce_enable_order_notes_field', '__return_false', 20);
 
 
