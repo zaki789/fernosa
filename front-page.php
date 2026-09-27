@@ -228,7 +228,7 @@ $intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
     <div class="container">
       <div class="section-head">
         <div><span class="section-kicker">DISCOVER</span><h2 class="section-title">منوی فرنوسا</h2><p class="section-sub">محصولات و طعم‌های منتخب فرنوسا</p></div>
-        <a class="btn btn-ghost" href="<?php echo esc_url(home_url("/menu")); ?>">مشاهده منو</a>
+        
       </div>
 
       <?php if ($menu_view === 'tabs' || $menu_view === 'cards'): ?>
