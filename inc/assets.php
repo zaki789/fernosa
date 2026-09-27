@@ -4,20 +4,27 @@
  */
 if (!defined('ABSPATH')) { exit; }
 
-add_action('wp_enqueue_scripts', function () {
-    $ver = (defined('WP_DEBUG') && WP_DEBUG) ? time() : FERNOSA_GELATO_VERSION;
+/** Return a cache-busting version for a theme asset, with a safe fallback. */
+function fg_asset_version(string $rel): int|string {
+    $path = FERNOSA_GELATO_DIR . $rel;
+    if (file_exists($path)) {
+        $mtime = filemtime($path);
+        if (false !== $mtime) {
+            return $mtime;
+        }
+    }
+    return FERNOSA_GELATO_VERSION;
+}
 
-    $ver_file = static function (string $rel) use ($ver): int|string {
-        $path = FERNOSA_GELATO_DIR . $rel;
-        return file_exists($path) ? filemtime($path) : $ver;
-    };
+add_action('wp_enqueue_scripts', function () {
+    $ver = FERNOSA_GELATO_VERSION;
 
     // 1) فونت Vazirmatn — لوکال (assets/css/fonts.css → assets/fonts/vazormatn/)
     wp_enqueue_style(
         'fernosa-fonts',
         FERNOSA_GELATO_URI . '/assets/css/fonts.css',
         [],
-        $ver_file('/assets/css/fonts.css')
+        fg_asset_version('/assets/css/fonts.css')
     );
 
     // 2) Font Awesome 6 — لوکال (assets/font-awesome/all.min.css → webfonts/)
