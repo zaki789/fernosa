@@ -177,6 +177,17 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'section' => 'fernosa_home',
         'settings' => 'fernosa_hero_bg',
     ]));
+    $wp_customize->add_setting('fernosa_intro_video', [
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+    $wp_customize->add_control('fernosa_intro_video', [
+        'label' => __('ویدئوی شروع سایت (URL فایل MP4 محلی)', 'fernosa-gelato'),
+        'description' => __('فقط فایل MP4 روی خود سایت؛ برای سرعت، ویدئو را با H.264 فشرده کنید.', 'fernosa-gelato'),
+        'section' => 'fernosa_home',
+        'type' => 'url',
+    ]);
+
     $wp_customize->add_section('fernosa_header', [
         'title' => __('هدر (دکمه‌ها و لینک‌ها)', 'fernosa-gelato'),
         'priority' => 32,
