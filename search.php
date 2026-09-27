@@ -29,7 +29,7 @@ $q = new WP_Query( $args );
 				<?php echo esc_html__( 'نتایج جستجو برای:', 'fernosa-gelato' ); ?>
 				<span class="fg-search-term"><?php echo esc_html( $term ); ?></span>
 			</h1>
-			<p class="fg-search-sub"><?php echo esc_html__( 'محصولات پیدا شده را همین‌جا ببینید و سریع به سبد اضافه کنید.', 'fernosa-gelato' ); ?></p>
+			<p class="fg-search-sub"><?php echo esc_html__( 'محصولات پیدا شده را همین‌جا ببینید و جزئیات هر محصول را مشاهده کنید.', 'fernosa-gelato' ); ?></p>
 		</div>
 	</section>
 
@@ -71,16 +71,11 @@ $q = new WP_Query( $args );
 								<div class="fg-product-price">
 									<?php echo wp_kses_post( $product ? $product->get_price_html() : '' ); ?>
 								</div>
-
-								<div class="fg-product-actions">
-									<?php
-									if ( function_exists( 'woocommerce_template_loop_add_to_cart' ) ) {
-										woocommerce_template_loop_add_to_cart();
-									}
-									?>
-								</div>
-							</div>
-						</div>
+                <div class="fg-product-actions">
+                  <a class="btn btn-ghost" href="<?php echo esc_url( get_permalink() ); ?>">مشاهده محصول</a>
+                </div>
+              </div>
+            </div>
 					</article>
 				<?php endwhile; ?>
 			</div>
