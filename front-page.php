@@ -186,10 +186,26 @@ function fernosa_get_products_count_for_cat(int $term_id): int {
 
 
 $cats = fernosa_get_menu_categories(24);
-$menu_view = get_theme_mod('fernosa_menu_view', 'accordion');
+$menu_view = get_theme_mod('fernosa_menu_view', 'cards');
 $cats = fernosa_get_menu_categories(20);
+$intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
 ?>
 <main class="site-main">
+  <?php if ($intro_video): ?>
+    <section class="fg-intro-video" aria-label="معرفی فرنوسا">
+      <video class="fg-intro-video__media" autoplay muted playsinline preload="metadata" poster="<?php echo esc_url($hero_bg); ?>">
+        <source src="<?php echo esc_url($intro_video); ?>" type="video/mp4">
+      </video>
+      <div class="fg-intro-video__overlay"></div>
+      <div class="fg-intro-video__content container">
+        <span class="fg-kicker">FERNOSA GELATO</span>
+        <h1>طعم یک تجربه متفاوت</h1>
+        <a class="btn btn-primary" href="#menu">مشاهده منو</a>
+      </div>
+      <button class="fg-intro-video__skip" type="button" aria-label="بستن ویدئوی معرفی">×</button>
+    </section>
+  <?php endif; ?>
+
   <?php if ( fg_bool_opt('show_hero', get_theme_mod('fg_show_hero', true)) ) : ?>
 <section class="hero" style="background-image:url('<?php echo esc_url($hero_bg); ?>');">
     <div class="hero-overlay"></div>
@@ -211,8 +227,8 @@ $cats = fernosa_get_menu_categories(20);
   <section class="menu-section" id="menu">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">منوی فرنوسا</h2>
-        <p class="section-sub"></p>
+        <div><span class="section-kicker">DISCOVER</span><h2 class="section-title">منوی فرنوسا</h2><p class="section-sub">محصولات و طعم‌های منتخب فرنوسا</p></div>
+        <a class="btn btn-ghost" href="<?php echo esc_url(home_url("/menu")); ?>">مشاهده منو</a>
       </div>
 
       <?php if ($menu_view === 'tabs' || $menu_view === 'cards'): ?>
@@ -272,7 +288,7 @@ $cats = fernosa_get_menu_categories(20);
                     <div class="product-price"><?php echo wp_kses_post($price_html); ?></div>
 
                     <div class="product-actions">
-                      <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">مشاهده محصول</a>
+                      <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">جزئیات</a>
                     </div>
 
                   </div>
@@ -401,6 +417,20 @@ $cats = fernosa_get_menu_categories(20);
     </div>
 <?php endif; ?>
   </section>
+
+  <section class="fg-new-products" aria-labelledby="fg-new-title">
+    <div class="container">
+      <div class="section-head"><div><span class="section-kicker">JUST ARRIVED</span><h2 class="section-title" id="fg-new-title">محصولات جدید</h2><p class="section-sub">محصولاتی که تازه به فرنوسا اضافه شده‌اند</p></div></div>
+      <div class="product-cards fg-new-grid">
+        <?php
+        $new_products = class_exists("WooCommerce") ? (new WC_Product_Query(["limit"=>8,"status"=>"publish","orderby"=>"date","order"=>"DESC","return"=>"objects","type"=>["simple","variable","grouped","external"]]))->get_products() : [];
+        foreach ((array)$new_products as $p): echo fernosa_product_card_html($p); endforeach;
+        ?>
+      </div>
+    </div>
+  </section>
+
+  <section class="fg-menu-link"><div class="container"><a class="fg-menu-link__button" href="<?php echo esc_url(home_url("/menu")); ?>">مشاهده منو <i class="fa-solid fa-arrow-left"></i></a></div></section>
 
   <section class="about-snippet" id="about">
     <div class="container about-grid">
