@@ -127,31 +127,6 @@
 
   document.addEventListener('click', (e) => {
     if (!e.target) return;
-
-    const addBtn = e.target.closest('[data-add]');
-    if (addBtn) {
-      const pid = parseInt(addBtn.getAttribute('data-add'), 10);
-      if (!pid) return;
-      addBtn.classList.add('is-loading');
-      // Reuse existing cart qty ajax if present
-      const body = new URLSearchParams();
-      body.set('action', 'fernosa_set_cart_qty');
-      body.set('nonce', (window.FERNOSA && FERNOSA.nonce) ? FERNOSA.nonce : '');
-      body.set('product_id', String(pid));
-      body.set('qty', '1');
-      fetch(ajaxUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-        body: body.toString(),
-        credentials: 'same-origin'
-      }).then(r => r.json()).then(json => {
-        if (json && json.success) {
-          document.querySelectorAll('.cart-count').forEach(el => el.textContent = String(json.data.count || 0));
-        }
-      }).finally(() => addBtn.classList.remove('is-loading'));
-      return;
-    }
-
     const goBtn = e.target.closest('[data-go]');
     if (goBtn) {
       const pid = parseInt(goBtn.getAttribute('data-go'), 10);
