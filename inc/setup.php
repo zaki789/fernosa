@@ -177,8 +177,6 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'section' => 'fernosa_home',
         'settings' => 'fernosa_hero_bg',
     ]));
-
-    // Header buttons text (WooCommerce account/cart labels)
     $wp_customize->add_section('fernosa_header', [
         'title' => __('هدر (دکمه‌ها و لینک‌ها)', 'fernosa-gelato'),
         'priority' => 32,
@@ -193,17 +191,6 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'section' => 'fernosa_header',
         'type' => 'checkbox',
     ]);
-
-    $wp_customize->add_setting('fernosa_header_show_cart', [
-        'default' => true,
-        'sanitize_callback' => function($v){ return (bool) $v; },
-    ]);
-    $wp_customize->add_control('fernosa_header_show_cart', [
-        'label' => __('نمایش دکمه سبد خرید', 'fernosa-gelato'),
-        'section' => 'fernosa_header',
-        'type' => 'checkbox',
-    ]);
-
     // Social links
     $wp_customize->add_section('fernosa_social', [
         'title' => __('شبکه‌های اجتماعی (فوتر)', 'fernosa-gelato'),
