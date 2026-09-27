@@ -188,7 +188,8 @@ function fernosa_get_products_count_for_cat(int $term_id): int {
 $cats = fernosa_get_menu_categories(24);
 $menu_view = get_theme_mod('fernosa_menu_view', 'cards');
 $cats = fernosa_get_menu_categories(20);
-$intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
+$intro_video_id = absint(get_theme_mod('fernosa_intro_video', 0));
+$intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
 ?>
 <main class="site-main">
   <?php if ($intro_video): ?>
