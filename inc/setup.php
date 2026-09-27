@@ -181,12 +181,12 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'default' => '',
         'sanitize_callback' => 'esc_url_raw',
     ]);
-    $wp_customize->add_control('fernosa_intro_video', [
-        'label' => __('ویدئوی شروع سایت (URL فایل MP4 محلی)', 'fernosa-gelato'),
-        'description' => __('فقط فایل MP4 روی خود سایت؛ برای سرعت، ویدئو را با H.264 فشرده کنید.', 'fernosa-gelato'),
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'fernosa_intro_video', [
+        'label' => __('ویدئوی شروع سایت', 'fernosa-gelato'),
+        'description' => __('فایل MP4 را از رسانه‌های وردپرس انتخاب کنید. در موبایل، ویدئو هنگام ورود به سایت نمایش داده می‌شود.', 'fernosa-gelato'),
         'section' => 'fernosa_home',
-        'type' => 'url',
-    ]);
+        'mime_type' => 'video',
+    ]));
 
     $wp_customize->add_section('fernosa_header', [
         'title' => __('هدر (دکمه‌ها و لینک‌ها)', 'fernosa-gelato'),
