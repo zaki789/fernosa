@@ -5,7 +5,7 @@
  */
 if (!defined('ABSPATH')) { exit; }
 
-define('FERNOSA_GELATO_VERSION', '1.0.8');
+define('FERNOSA_GELATO_VERSION', '1.0.9');
 define('FERNOSA_GELATO_DIR', get_template_directory());
 define('FERNOSA_GELATO_URI', get_template_directory_uri());
 
@@ -47,8 +47,8 @@ function fg_preload_hero_image() {
 /* FG_WC_POLISH_V12 */
 add_action('wp_enqueue_scripts', function() {
 	if ( function_exists('is_woocommerce') && ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) {
-		wp_enqueue_style('fg-woocommerce-polish', get_template_directory_uri() . '/assets/css/fg-woocommerce-polish.css', array(), filemtime(get_template_directory() . '/assets/css/fg-woocommerce-polish.css'));
-		wp_enqueue_script('fg-checkout-coupon', get_template_directory_uri() . '/assets/js/fg-checkout-coupon.js', array(), filemtime(get_template_directory() . '/assets/js/fg-checkout-coupon.js'), true);
+		wp_enqueue_style('fg-woocommerce-polish', get_template_directory_uri() . '/assets/css/fg-woocommerce-polish.css', array(), fg_asset_version('/assets/css/fg-woocommerce-polish.css'));
+		wp_enqueue_script('fg-checkout-coupon', get_template_directory_uri() . '/assets/js/fg-checkout-coupon.js', array(), fg_asset_version('/assets/js/fg-checkout-coupon.js'), true);
 	}
 });
 
@@ -114,71 +114,20 @@ add_filter('gettext', function($translated, $text, $domain) {
 	return isset($map[$text]) ? $map[$text] : $translated;
 }, 20, 3);
 
-/* FG_CHECKOUT_FIELDS_MINIMAL */
-add_filter('woocommerce_checkout_fields', function($fields) {
-	$allowed = array(
-		'billing_first_name',
-		'billing_last_name',
-		'billing_phone',
-		'billing_address_1',
-		'fg_delivery_slot',
-		'fg_map_lat',
-		'fg_map_lng',
-	);
-
-	foreach ($fields as $section_key => $section) {
-		foreach ($section as $key => $field) {
-			if ( 0 === strpos($key, 'billing_') && ! in_array($key, $allowed, true) ) {
-				unset($fields[$section_key][$key]);
-			}
-			if ( 0 === strpos($key, 'shipping_') ) {
-				unset($fields[$section_key][$key]);
-			}
-		}
-	}
-
-	if ( isset($fields['billing']['billing_first_name']) ) {
-		$fields['billing']['billing_first_name']['label'] = 'نام';
-		$fields['billing']['billing_first_name']['priority'] = 10;
-		$fields['billing']['billing_first_name']['required'] = true;
-	}
-	if ( isset($fields['billing']['billing_last_name']) ) {
-		$fields['billing']['billing_last_name']['label'] = 'نام خانوادگی';
-		$fields['billing']['billing_last_name']['priority'] = 20;
-		$fields['billing']['billing_last_name']['required'] = true;
-	}
-	if ( isset($fields['billing']['billing_phone']) ) {
-		$fields['billing']['billing_phone']['label'] = 'شماره تماس';
-		$fields['billing']['billing_phone']['priority'] = 30;
-		$fields['billing']['billing_phone']['required'] = true;
-		$fields['billing']['billing_phone']['placeholder'] = '09xxxxxxxxx';
-	}
-	if ( isset($fields['billing']['billing_address_1']) ) {
-		$fields['billing']['billing_address_1']['label'] = 'آدرس';
-		$fields['billing']['billing_address_1']['priority'] = 40;
-		$fields['billing']['billing_address_1']['required'] = true;
-		$fields['billing']['billing_address_1']['placeholder'] = 'خیابان، پلاک، واحد...';
-	}
-
-	unset($fields['order']['order_comments']);
-
-	return $fields;
-}, 20);
-
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
 add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
 
 /* FG_SEARCH_RESULTS_STYLE */
 add_action('wp_enqueue_scripts', function() {
 	if ( is_search() ) {
-		wp_enqueue_style('fg-search-results', get_template_directory_uri() . '/assets/css/fg-search-results.css', array(), filemtime(get_template_directory() . '/assets/css/fg-search-results.css'));
+		wp_enqueue_style('fg-search-results', get_template_directory_uri() . '/assets/css/fg-search-results.css', array(), fg_asset_version('/assets/css/fg-search-results.css'));
 	}
 });
 
 /* FG_SINGLE_PRODUCT_STYLE */
 add_action('wp_enqueue_scripts', function() {
 	if ( function_exists('is_product') && is_product() ) {
-		wp_enqueue_style('fg-single-product', get_template_directory_uri() . '/assets/css/fg-single-product.css', array(), filemtime(get_template_directory() . '/assets/css/fg-single-product.css'));
+		wp_enqueue_style('fg-single-product', get_template_directory_uri() . '/assets/css/fg-single-product.css', array(), fg_asset_version('/assets/css/fg-single-product.css'));
 	}
 });
 
