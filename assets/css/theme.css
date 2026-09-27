@@ -827,3 +827,21 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
   }
 }
 
+
+
+/* Fernosa final homepage UI */
+.section-kicker{display:block;margin-bottom:6px;color:var(--secondary-color,#988c75);font-size:11px;font-weight:900;letter-spacing:.14em}
+.fg-intro-video{position:relative;min-height:100svh;overflow:hidden;background:#013a17}
+.fg-intro-video__media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fg-intro-video__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,58,23,.08),rgba(1,58,23,.78))}
+.fg-intro-video__content{position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding-bottom:12vh}
+.fg-intro-video__content h1{margin:8px 0 18px;color:#fff;font-size:clamp(28px,7vw,64px);font-weight:900}
+.fg-intro-video__skip{position:absolute;z-index:3;top:18px;right:18px;width:42px;height:42px;border:1px solid rgba(255,255,255,.3);border-radius:50%;background:rgba(1,58,23,.45);color:#fff;font-size:25px;cursor:pointer}
+.fg-menu-link{padding:10px 0 30px}.fg-menu-link__button{display:flex;align-items:center;justify-content:center;gap:12px;min-height:58px;border-radius:18px;background:#988c75;color:#fff;text-decoration:none;font-weight:900}
+.fg-new-products{padding:48px 0 12px}.fg-new-grid{margin-top:18px}
+.product-card{background:#f8f0e2;border-color:rgba(1,58,23,.12);box-shadow:0 10px 28px rgba(1,58,23,.08);color:#013a17}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(1,58,23,.12)}
+.product-media img{aspect-ratio:1/1;height:auto;object-fit:cover}.product-body{padding:16px}.product-title-btn{color:#013a17;pointer-events:none}.product-desc{color:rgba(1,58,23,.68)}.product-foot .price{color:#013a17}.product-foot .product-view-link{display:none}
+@media(max-width:980px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-body{padding:12px}.product-desc{display:none}.product-media img{aspect-ratio:1/1}}
+@media(max-width:560px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.product-title{font-size:14px;line-height:1.5}.price{font-size:13px}.fg-new-products{padding-top:34px}}
+@media(prefers-reduced-motion:reduce){.product-card{transition:none}}
