@@ -46,7 +46,7 @@ function fg_preload_hero_image() {
 
 /* FG_WC_POLISH_V12 */
 add_action('wp_enqueue_scripts', function() {
-	if ( function_exists('is_woocommerce') && ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) {
+	if ( function_exists('is_woocommerce') && ( is_woocommerce() || is_checkout() || is_account_page() ) ) {
 		wp_enqueue_style('fg-woocommerce-polish', get_template_directory_uri() . '/assets/css/fg-woocommerce-polish.css', array(), fg_asset_version('/assets/css/fg-woocommerce-polish.css'));
 		wp_enqueue_script('fg-checkout-coupon', get_template_directory_uri() . '/assets/js/fg-checkout-coupon.js', array(), fg_asset_version('/assets/js/fg-checkout-coupon.js'), true);
 	}
@@ -114,8 +114,7 @@ add_filter('gettext', function($translated, $text, $domain) {
 	return isset($map[$text]) ? $map[$text] : $translated;
 }, 20, 3);
 
-add_filter('woocommerce_enable_order_notes_field', '__return_false');
-add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
+add_filter('woocommerce_enable_order_notes_field', '__return_false');add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
 
 /* FG_SEARCH_RESULTS_STYLE */
 add_action('wp_enqueue_scripts', function() {
@@ -171,7 +170,7 @@ add_action('customize_register', function($wp_customize) {
 
 	$wp_customize->add_setting('fg_show_order_info', array('default' => true, 'transport' => 'refresh'));
 	$wp_customize->add_control('fg_show_order_info', array(
-		'label' => 'نمایش این بخش در سبد و پرداخت',
+		'label' => 'نمایش این بخش در پرداخت',
 		'section' => 'fg_order_info',
 		'type' => 'checkbox',
 	));
@@ -189,7 +188,6 @@ function fg_render_order_info_box() {
 	echo '</div>';
 }
 
-add_action('woocommerce_before_cart_totals', 'fg_render_order_info_box', 5);
 add_action('woocommerce_before_checkout_form', 'fg_render_order_info_box', 5);
 
 /* FG_TOGGLES_AND_COLORS */
@@ -645,15 +643,6 @@ add_action('woocommerce_thankyou', function($order_id){
 	));
 }, 20);
 
-add_action('wp_enqueue_scripts', function(){
-	if ( function_exists('is_cart') && is_cart() ) {
-		wp_enqueue_style('fg-lux', get_template_directory_uri() . '/assets/css/fg-lux-checkout.css', array(), filemtime(get_template_directory() . '/assets/css/fg-lux-checkout.css'));
-	}
-	if ( function_exists('is_checkout') && is_checkout() ) {
-		wp_enqueue_style('fg-lux', get_template_directory_uri() . '/assets/css/fg-lux-checkout.css', array(), filemtime(get_template_directory() . '/assets/css/fg-lux-checkout.css'));
-	}
-});
-
 /* FG_SHIPPING_DEST_TRIM */
 add_filter('woocommerce_shipping_destination_html', function($html){
 	$html = wp_strip_all_tags($html);
@@ -664,10 +653,6 @@ add_filter('woocommerce_shipping_destination_html', function($html){
 	return '<p class="woocommerce-shipping-destination">' . esc_html($html) . '</p>';
 }, 20);
 
-/* FG_CART_NO_SHIPPING */
-add_filter('woocommerce_enable_shipping_calc', '__return_false', 100);
-add_filter('woocommerce_cart_ready_to_calc_shipping', '__return_false', 100);
-add_filter('woocommerce_cart_totals_get_fees_from_cart_taxes', function($val){ return $val; }, 10);
 
 /* FG_CHECKOUT_ORDER_NOTES */
 add_filter('woocommerce_checkout_fields', function($fields){
@@ -683,12 +668,6 @@ add_filter('woocommerce_checkout_fields', function($fields){
 	return $fields;
 }, 55);
 
-/* FG_CART_AUTOUPDATE */
-add_action('wp_enqueue_scripts', function(){
-	if ( function_exists('is_cart') && is_cart() ) {
-		wp_enqueue_script('fg-cart-autoupdate', get_template_directory_uri() . '/assets/js/fg-cart-autoupdate.js', array(), filemtime(get_template_directory() . '/assets/js/fg-cart-autoupdate.js'), true);
-	}
-}, 25);
 
 /* ============================================
    تنظیم ترتیب نمایش محصولات
@@ -766,31 +745,12 @@ add_action('wp_enqueue_scripts', function() {
     }
 }, 100);
 
-// حذف دکمه افزودن به سبد خرید در کل سایت
-add_action('init', function () {
 
-    // صفحه محصول
-    remove_action(
-        'woocommerce_single_product_summary',
-        'woocommerce_template_single_add_to_cart',
-        30
-    );
 
-    // صفحه فروشگاه و دسته‌بندی‌ها
-    remove_action(
-        'woocommerce_after_shop_loop_item',
-        'woocommerce_template_loop_add_to_cart',
-        10
-    );
+/* FG_DISABLE_CART */
+add_action('template_redirect', function () {
+    if (function_exists('is_cart') && is_cart()) {
+        wp_safe_redirect(home_url('/'), 301);
+        exit;
+    }
 });
-/**
- * Fernosa - مقدار اولیه تعداد محصول در کارت
- * عدد پیش‌فرض را از 1 به 0 تغییر می‌دهد.
- */
-add_filter('woocommerce_quantity_input_args', function ($args, $product) {
-
-    $args['input_value'] = 0;
-
-    return $args;
-
-}, 100, 2);
