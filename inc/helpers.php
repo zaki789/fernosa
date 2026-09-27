@@ -137,8 +137,6 @@ function fernosa_product_card_html($p): string {
         <p class="product-desc"><?php echo esc_html($desc); ?></p>
         <div class="product-foot">
           <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
-
-          <a class="btn btn-ghost product-view-link" href="<?php echo esc_url(get_permalink($id)); ?>">مشاهده محصول</a>
         </div>
       </div>
     </div>
