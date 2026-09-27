@@ -416,17 +416,47 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
 <?php endif; ?>
   </section>
 
+  <?php
+  $selected_new_ids = array_values(array_filter(array_map('absint', preg_split('/[\s,،]+/', (string) get_theme_mod('fernosa_new_product_ids', '')))));
+  $selected_new_ids = array_slice(array_unique($selected_new_ids), 0, 12);
+  $new_products = [];
+
+  if (class_exists('WooCommerce') && !empty($selected_new_ids)) {
+      $products_by_id = [];
+      foreach ($selected_new_ids as $selected_id) {
+          $product = wc_get_product($selected_id);
+          if ($product && $product->is_visible() && $product->get_status() === 'publish') {
+              $products_by_id[$selected_id] = $product;
+          }
+      }
+      foreach ($selected_new_ids as $selected_id) {
+          if (isset($products_by_id[$selected_id])) {
+              $new_products[] = $products_by_id[$selected_id];
+          }
+      }
+  }
+  ?>
+
+  <?php if (!empty($new_products)): ?>
   <section class="fg-new-products" aria-labelledby="fg-new-title">
     <div class="container">
-      <div class="section-head"><div><span class="section-kicker">JUST ARRIVED</span><h2 class="section-title" id="fg-new-title">محصولات جدید</h2><p class="section-sub">محصولاتی که تازه به فرنوسا اضافه شده‌اند</p></div></div>
-      <div class="product-cards fg-new-grid">
-        <?php
-        $new_products = class_exists("WooCommerce") ? (new WC_Product_Query(["limit"=>8,"status"=>"publish","orderby"=>"date","order"=>"DESC","return"=>"objects","type"=>["simple","variable","grouped","external"]]))->get_products() : [];
-        foreach ((array)$new_products as $p): echo fernosa_product_card_html($p); endforeach;
-        ?>
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">JUST ARRIVED</span>
+          <h2 class="section-title" id="fg-new-title">محصولات جدید</h2>
+          <p class="section-sub">محصولات منتخب فرنوسا</p>
+        </div>
+      </div>
+      <div class="fg-new-scroller" dir="rtl" tabindex="0" aria-label="محصولات جدید">
+        <div class="fg-new-track">
+          <?php foreach ($new_products as $p): ?>
+            <div class="fg-new-slide"><?php echo fernosa_product_card_html($p); ?></div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
   <section class="fg-menu-link"><div class="container"><a class="fg-menu-link__button" href="<?php echo esc_url(home_url("/menu")); ?>">مشاهده منو <i class="fa-solid fa-arrow-left"></i></a></div></section>
 
