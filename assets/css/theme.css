@@ -845,3 +845,14 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
 @media(max-width:980px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-body{padding:12px}.product-desc{display:none}.product-media img{aspect-ratio:1/1}}
 @media(max-width:560px){.product-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.product-title{font-size:14px;line-height:1.5}.price{font-size:13px}.fg-new-products{padding-top:34px}}
 @media(prefers-reduced-motion:reduce){.product-card{transition:none}}
+
+
+/* Intro video is a mobile entry experience; desktop keeps the static hero. */
+.fg-intro-video{display:none}
+@media (max-width:767px){
+  .fg-intro-video{display:block}
+  .fg-intro-video__media{preload:metadata}
+}
+.menu-category-page{padding:26px 0 8px}
+.menu-category-page h2{margin:0 0 10px;font-size:clamp(19px,4vw,26px);color:#f8f0e2}
+.fg-dedicated-menu .product-card{background:#f8f0e2}
