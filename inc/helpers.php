@@ -138,17 +138,7 @@ function fernosa_product_card_html($p): string {
         <div class="product-foot">
           <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
 
-          <div class="fg-cartctl" data-cartctl data-product-id="<?php echo esc_attr($id); ?>">
-            <button class="fg-cartbtn" type="button" aria-label="افزودن به سبد خرید">
-              <i class="fa-solid fa-bag-shopping"></i>
-            </button>
-
-            <div class="fg-qty" hidden>
-              <button class="fg-qtybtn" type="button" data-delta="-1" aria-label="کم کردن">−</button>
-              <span class="fg-qtynum" aria-live="polite">1</span>
-              <button class="fg-qtybtn" type="button" data-delta="1" aria-label="زیاد کردن">+</button>
-            </div>
-          </div>
+          <a class="btn btn-ghost product-view-link" href="<?php echo esc_url(get_permalink($id)); ?>">مشاهده محصول</a>
         </div>
       </div>
     </div>
