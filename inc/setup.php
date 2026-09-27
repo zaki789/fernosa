@@ -181,6 +181,21 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'default' => '',
         'sanitize_callback' => 'esc_url_raw',
     ]);
+    $wp_customize->add_setting('fernosa_new_product_ids', [
+        'default' => '',
+        'sanitize_callback' => function($value) {
+            $ids = array_values(array_filter(array_map('absint', preg_split('/[\s,،]+/', (string) $value))));
+            return implode(',', array_slice(array_unique($ids), 0, 12));
+        },
+    ]);
+    $wp_customize->add_control('fernosa_new_product_ids', [
+        'label' => __('محصولات بخش «محصولات جدید»', 'fernosa-gelato'),
+        'description' => __('شناسه محصولات را به ترتیب نمایش با کاما جدا کنید؛ مثال: 123,456,789. فقط محصولات منتشرشده نمایش داده می‌شوند.', 'fernosa-gelato'),
+        'section' => 'fernosa_home',
+        'type' => 'text',
+        'input_attrs' => ['placeholder' => '123,456,789', 'dir' => 'ltr'],
+    ]);
+
     $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'fernosa_intro_video', [
         'label' => __('ویدئوی شروع سایت', 'fernosa-gelato'),
         'description' => __('فایل MP4 را از رسانه‌های وردپرس انتخاب کنید. در موبایل، ویدئو هنگام ورود به سایت نمایش داده می‌شود.', 'fernosa-gelato'),
