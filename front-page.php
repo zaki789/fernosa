@@ -354,7 +354,7 @@ $intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
                   <?php foreach ($products as $p):
                       $id = $p->get_id();
                       $img = wp_get_attachment_image_src($p->get_image_id(), 'large');
-                      $img_url = $img ? $img[0] : 'https://fernosa.ir/wp-content/themes/fernosa-gelato/assets/img/logo-icon.png';
+                      $img_url = $img ? $img[0] : get_template_directory_uri() . '/assets/img/logo-icon.png';
                       $img_full = wp_get_attachment_image_src($p->get_image_id(), 'full');
                       $img_full_url = $img_full ? $img_full[0] : $img_url;
                       $badges = [];
