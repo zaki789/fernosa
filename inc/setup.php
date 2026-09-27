@@ -179,7 +179,7 @@ $wp_customize->add_setting('fernosa_footer_bg', [
     ]));
     $wp_customize->add_setting('fernosa_intro_video', [
         'default' => '',
-        'sanitize_callback' => 'esc_url_raw',
+        'sanitize_callback' => 'absint',
     ]);
     $wp_customize->add_setting('fernosa_new_product_ids', [
         'default' => '',
