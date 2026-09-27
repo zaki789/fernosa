@@ -201,7 +201,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
       <div class="fg-intro-video__content container">
         <span class="fg-kicker">FERNOSA GELATO</span>
         <h1>طعم یک تجربه متفاوت</h1>
-        <a class="btn btn-primary" href="#menu">مشاهده منو</a>
+        <button class="btn btn-primary fg-intro-video__menu" type="button">مشاهده منو</button>
       </div>
       <button class="fg-intro-video__skip" type="button" aria-label="بستن ویدئوی معرفی">×</button>
     </section>
@@ -458,8 +458,6 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
     </div>
 <?php endif; ?>
   </section>
-
-  <section class="fg-menu-link"><div class="container"><a class="fg-menu-link__button" href="<?php echo esc_url(home_url("/menu")); ?>">مشاهده منو <i class="fa-solid fa-arrow-left"></i></a></div></section>
 
   <section class="about-snippet" id="about">
     <div class="container about-grid">
