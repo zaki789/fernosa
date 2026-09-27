@@ -13,6 +13,11 @@
     introVideo.addEventListener('ended', () => document.querySelector('.fg-intro-video')?.classList.add('is-done'), { once:true });
   }
   if (introSkip) introSkip.addEventListener('click', () => document.querySelector('.fg-intro-video')?.remove());
+  const introMenu = document.querySelector('.fg-intro-video__menu');
+  if (introMenu) introMenu.addEventListener('click', () => {
+    document.querySelector('.fg-intro-video')?.remove();
+    document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   const onScroll = () => {
     if (!header) return;
