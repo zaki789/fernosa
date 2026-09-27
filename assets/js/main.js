@@ -125,7 +125,7 @@
     const card = e.target.closest('[data-product-modal]');
     if (!card) return;
     // Ignore clicks on add-to-cart buttons/links
-    if (e.target.closest('.add_to_cart_button, .single_add_to_cart_button, .ajax_add_to_cart, form, input, button.btn, .fg-cartctl, .fg-cartbtn, .fg-qtybtn')) {
+    if (e.target.closest('.add_to_cart_button, .single_add_to_cart_button, .ajax_add_to_cart, form, input, button.btn')) {
       return;
     }
     // Only open when clicking on media or title button
@@ -139,40 +139,6 @@
       image: card.getAttribute('data-image'),
     });
   });
-
-  // ---- Shared helpers: header cart count + AJAX ----
-  const updateHeaderCount = (() => {
-    let lastCount = -1;
-    const els = [];
-    const getEls = () => {
-      if (els.length === 0) {
-        document.querySelectorAll('.cart-count').forEach(e => els.push(e));
-      }
-      return els;
-    };
-    return (count) => {
-      const c = String(count);
-      if (c === lastCount) return;
-      lastCount = c;
-      getEls().forEach(el => el.textContent = c);
-    };
-  })();
-
-  const postAjax = async (action, data, nonceKey) => {
-    const body = new URLSearchParams();
-    body.set('action', action);
-    const nonce = (window.FERNOSA && FERNOSA[nonceKey]) ? FERNOSA[nonceKey] : '';
-    body.set('nonce', nonce);
-    Object.entries(data || {}).forEach(([k, v]) => body.set(k, String(v)));
-    const res = await fetch((window.FERNOSA && FERNOSA.ajaxUrl) ? FERNOSA.ajaxUrl : '/wp-admin/admin-ajax.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-      body: body.toString(),
-      credentials: 'same-origin'
-    });
-    return res.json();
-  };
-
   // ---- Lazy load: fetch products in small batches while scrolling ----
   const makeAllVisible = (root) => {
     if (!root) return;
@@ -344,59 +310,4 @@
 
   setupLazyLoadForAccordion();
   setupTabsMenu();
-
-  // ---- Cart controls (icon + quantity stepper) - real WooCommerce cart via admin-ajax ----
-  document.addEventListener('click', async (e) => {
-    const cartCtl = e.target.closest('[data-cartctl]');
-    if (!cartCtl) return;
-
-    const pid = cartCtl.getAttribute('data-product-id');
-    if (!pid) return;
-
-    const qtyBox = cartCtl.querySelector('.fg-qty');
-    const qtyNum = cartCtl.querySelector('.fg-qtynum');
-
-    // Add icon click
-    if (e.target.closest('.fg-cartbtn')) {
-      e.preventDefault();
-      const current = qtyBox && !qtyBox.hasAttribute('hidden') ? parseInt(qtyNum.textContent || '0', 10) : 0;
-      const desired = parseInt(cartCtl.getAttribute('data-desired-qty') || String(current), 10) || 0;
-      const targetQty = desired > 0 ? desired : (current + 1);
-      cartCtl.classList.add('is-loading');
-
-      try {
-        const json = await postAjax('fernosa_set_cart_qty', { product_id: pid, qty: targetQty }, 'nonce');
-        if (json && json.success) {
-          const q = json.data.qty;
-          if (qtyNum) qtyNum.textContent = String(q);
-          if (qtyBox) {
-            if (q > 0) qtyBox.removeAttribute('hidden');
-            else qtyBox.setAttribute('hidden', 'hidden');
-          }
-          cartCtl.removeAttribute('data-desired-qty');
-          updateHeaderCount(json.data.count);
-        }
-      } catch (_) {}
-      cartCtl.classList.remove('is-loading');
-      return;
-    }
-
-    // +/- click (LOCAL only - synced to cart on next bag-icon click)
-    const stepBtn = e.target.closest('.fg-qtybtn');
-    if (stepBtn) {
-      e.preventDefault();
-      const delta = parseInt(stepBtn.getAttribute('data-delta') || '0', 10);
-      const current = parseInt((qtyNum && qtyNum.textContent) ? qtyNum.textContent : '0', 10) || 0;
-      const next = Math.max(0, current + delta);
-
-      // Update UI only
-      if (qtyNum) qtyNum.textContent = String(next);
-      cartCtl.setAttribute('data-desired-qty', String(next));
-      if (qtyBox) {
-        if (next > 0) qtyBox.removeAttribute('hidden');
-        else qtyBox.setAttribute('hidden', 'hidden');
-      }
-      return;
-    }
-  });
 })();
