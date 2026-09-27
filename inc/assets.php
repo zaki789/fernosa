@@ -32,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
         'fernosa-fa6',
         FERNOSA_GELATO_URI . '/assets/font-awesome/all.min.css',
         [],
-        $ver_file('/assets/font-awesome/all.min.css')
+        fg_asset_version('/assets/font-awesome/all.min.css')
     );
 
     // 3) استایل اصلی قالب
@@ -40,7 +40,7 @@ add_action('wp_enqueue_scripts', function () {
         'fernosa-theme',
         FERNOSA_GELATO_URI . '/assets/css/theme.css',
         ['fernosa-fonts', 'fernosa-fa6'],
-        $ver_file('/assets/css/theme.css')
+        fg_asset_version('/assets/css/theme.css')
     );
 
     // 4) style.css قالب (هدر تم + اصلاحات جزئی)
@@ -51,7 +51,7 @@ add_action('wp_enqueue_scripts', function () {
         'fernosa-main',
         FERNOSA_GELATO_URI . '/assets/js/main.js',
         [],
-        $ver_file('/assets/js/main.js'),
+        fg_asset_version('/assets/js/main.js'),
         true
     );
 
@@ -60,7 +60,7 @@ add_action('wp_enqueue_scripts', function () {
         'fernosa-search',
         FERNOSA_GELATO_URI . '/assets/js/search.js',
         [],
-        $ver_file('/assets/js/search.js'),
+        fg_asset_version('/assets/js/search.js'),
         true
     );
 
