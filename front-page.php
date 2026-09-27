@@ -288,7 +288,6 @@ $intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
                     <div class="product-price"><?php echo wp_kses_post($price_html); ?></div>
 
                     <div class="product-actions">
-                      <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">جزئیات</a>
                     </div>
 
                   </div>
@@ -387,8 +386,6 @@ $intro_video = esc_url(get_theme_mod('fernosa_intro_video', ''));
                       <p class="product-desc"><?php echo esc_html($desc); ?></p>
                       <div class="product-foot">
                         <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
-
-                        <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">مشاهده محصول</a>
                       </div>
                     </div>
                   </div>
