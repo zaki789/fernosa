@@ -21,6 +21,11 @@ add_action('after_switch_theme', function () {
             'title' => 'تماس با ما',
             'slug'  => 'contact',
         ],
+        [
+            'title' => 'منو',
+            'slug'  => 'menu',
+            'set_menu' => true,
+        ],
     ];
 
     $created_any = false;
@@ -39,6 +44,10 @@ add_action('after_switch_theme', function () {
                 $existing = get_post($id);
                 $created_any = true;
             }
+        }
+
+        if (!empty($p['set_menu']) && $existing && $existing instanceof WP_Post && class_exists('WooCommerce')) {
+            wp_update_post(['ID' => $existing->ID, 'post_content' => '']);
         }
 
         if (!empty($p['set_front']) && $existing && $existing instanceof WP_Post) {
