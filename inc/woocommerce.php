@@ -36,6 +36,11 @@ add_filter('woocommerce_checkout_fields', function ($fields) {
         'billing_last_name',
         'billing_phone',
         'billing_address_1',
+        // Optional Fernosa delivery/map fields are preserved when another
+        // component registers them before this filter runs.
+        'fg_delivery_slot',
+        'fg_map_lat',
+        'fg_map_lng',
     ];
 
     if (isset($fields['billing']) && is_array($fields['billing'])) {
@@ -112,6 +117,17 @@ function fernosa_set_cart_qty() {
     // Ensure cart is loaded
     if (function_exists('wc_load_cart')) { wc_load_cart(); }
 
+    $product = wc_get_product($product_id);
+    if (!$product || !$product->exists()) {
+        wp_send_json_error(['message' => 'Invalid product.'], 404);
+    }
+    if (!$product->is_purchasable() || !$product->is_in_stock()) {
+        wp_send_json_error(['message' => 'Product is not available.'], 409);
+    }
+    if ($product->is_type('variable')) {
+        wp_send_json_error(['message' => 'A variation must be selected.'], 422);
+    }
+
     $delta = isset($_POST['delta']) ? intval($_POST['delta']) : null;
     $qty   = isset($_POST['qty']) ? intval($_POST['qty']) : null;
 
@@ -141,12 +157,16 @@ function fernosa_set_cart_qty() {
         }
         $new_qty = 0;
     } else {
+        $max_qty = $product->get_max_purchase_quantity();
+        if ($max_qty > 0) {
+            $qty = min($qty, $max_qty);
+        }
         if ($item_key) {
-            $cart->set_quantity($item_key, $qty, true);
-            $new_qty = $qty;
+            $result = $cart->set_quantity($item_key, $qty, true);
+            $new_qty = $result ? (int) $cart->get_cart_item($item_key)['quantity'] : $current;
         } else {
             $added_key = $cart->add_to_cart($product_id, $qty);
-            $new_qty = $added_key ? $qty : 0;
+            $new_qty = $added_key ? (int) $cart->get_cart_item($added_key)['quantity'] : 0;
         }
     }
 
