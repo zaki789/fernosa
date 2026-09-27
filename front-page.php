@@ -272,16 +272,7 @@ $cats = fernosa_get_menu_categories(20);
                     <div class="product-price"><?php echo wp_kses_post($price_html); ?></div>
 
                     <div class="product-actions">
-                      <div class="fg-cartctl" data-cartctl data-product-id="<?php echo esc_attr($pid); ?>">
-                        <button class="fg-cartbtn" type="button" aria-label="افزودن به سبد">
-                          <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <div class="fg-qty" hidden>
-                          <button class="fg-qtybtn" data-delta="-1" type="button" aria-label="کم کردن">-</button>
-                          <span class="fg-qtynum">1</span>
-                          <button class="fg-qtybtn" data-delta="1" type="button" aria-label="زیاد کردن">+</button>
-                        </div>
-                      </div>
+                      <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">مشاهده محصول</a>
                     </div>
 
                   </div>
@@ -381,17 +372,7 @@ $cats = fernosa_get_menu_categories(20);
                       <div class="product-foot">
                         <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
 
-                        <div class="fg-cartctl" data-cartctl data-product-id="<?php echo esc_attr($id); ?>">
-                          <button class="fg-cartbtn" type="button" aria-label="افزودن به سبد خرید">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                          </button>
-
-                          <div class="fg-qty" hidden>
-                            <button class="fg-qtybtn" type="button" data-delta="-1" aria-label="کم کردن">−</button>
-                            <span class="fg-qtynum" aria-live="polite">1</span>
-                            <button class="fg-qtybtn" type="button" data-delta="1" aria-label="زیاد کردن">+</button>
-                          </div>
-                        </div>
+                        <a class="btn btn-ghost product-view-link" href="<?php echo esc_url($p->get_permalink()); ?>">مشاهده محصول</a>
                       </div>
                     </div>
                   </div>
