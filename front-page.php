@@ -469,7 +469,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
         <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/about')); ?>"><i class="fa-solid fa-arrow-left"></i> درباره ما</a>
       </div>
       <div class="about-media reveal">
-        <img src="https://fernosa.ir/wp-content/themes/fernosa-gelato/assets/img/fernosa1.jpg" alt="Cafe" loading="lazy">
+        <img src="<?php echo esc_url(FERNOSA_GELATO_URI . '/assets/img/fernosa1.jpg'); ?>" alt="Cafe" loading="lazy">
       </div>
     </div>
   </section>
