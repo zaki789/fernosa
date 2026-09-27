@@ -68,7 +68,6 @@ add_action('wp_enqueue_scripts', function () {
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'homeUrl' => home_url('/'),
         'isRtl'   => is_rtl(),
-        'nonce'   => wp_create_nonce('fernosa_cart_qty'),
         'productsNonce' => wp_create_nonce('fernosa_products_load'),
         'searchNonce' => wp_create_nonce('fernosa_product_search'),
     ]);
