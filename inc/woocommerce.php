@@ -13,13 +13,6 @@ if (!defined('ABSPATH')) { exit; }
 
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
-// Persian "Add to cart" text everywhere
-add_filter('woocommerce_product_add_to_cart_text', function($text){
-    return 'افزودن به سبد خرید';
-}, 20);
-add_filter('woocommerce_product_single_add_to_cart_text', function($text){
-    return 'افزودن به سبد خرید';
-}, 20);
 
 add_filter('woocommerce_checkout_fields', function ($fields) {
 
