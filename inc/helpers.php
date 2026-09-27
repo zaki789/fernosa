@@ -103,7 +103,7 @@ function fernosa_product_card_html($p): string {
     $id = (int) $p->get_id();
 
     $img = wp_get_attachment_image_src($p->get_image_id(), 'large');
-    $img_url = $img ? $img[0] : 'https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80';
+    $img_url = $img ? $img[0] : '';
 
     $img_full = wp_get_attachment_image_src($p->get_image_id(), 'full');
     $img_full_url = $img_full ? $img_full[0] : $img_url;
