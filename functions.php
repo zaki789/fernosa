@@ -73,17 +73,12 @@ add_filter('gettext', function($translated, $text, $domain) {
 			'Apply coupon' => 'اعمال کد',
 			'Coupon code' => 'کد تخفیف',
 			'Place order' => 'ثبت سفارش',
-			// سبد خرید
-			'Cart totals' => 'جمع سبد',
-			'Proceed to checkout' => 'ادامه و پرداخت',
-			'Subtotal' => 'جمع جزء',
+			// سبد خرید			'Subtotal' => 'جمع جزء',
 			'Total' => 'مبلغ نهایی',
 			'Product' => 'محصول',
 			'Price' => 'قیمت',
 			'Quantity' => 'تعداد',
-			'Remove item' => 'حذف',
-			'Update cart' => 'به‌روزرسانی سبد',
-			// ارسال
+			'Remove item' => 'حذف',			// ارسال
 			'Shipping' => 'ارسال',
 			'Free shipping' => 'ارسال رایگان',
 			'Shipping to' => 'ارسال به',
@@ -114,7 +109,8 @@ add_filter('gettext', function($translated, $text, $domain) {
 	return isset($map[$text]) ? $map[$text] : $translated;
 }, 20, 3);
 
-add_filter('woocommerce_enable_order_notes_field', '__return_false');add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
+add_filter('woocommerce_enable_order_notes_field', '__return_false');
+add_filter('woocommerce_cart_needs_shipping_address', '__return_false');
 
 /* FG_SEARCH_RESULTS_STYLE */
 add_action('wp_enqueue_scripts', function() {
@@ -470,8 +466,8 @@ add_action('wp_enqueue_scripts', function(){
 	if ( function_exists('is_checkout') && is_checkout() && fg_bool_opt('enable_map', get_theme_mod('fg_enable_map', true)) ) {
 		wp_enqueue_style('fg-leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', array(), '1.9.4');
 		wp_enqueue_script('fg-leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', array(), '1.9.4', true);
-		wp_enqueue_style('fg-checkout-map', get_template_directory_uri() . '/assets/css/fg-checkout-map.css', array(), filemtime(get_template_directory() . '/assets/css/fg-checkout-map.css'));
-		wp_enqueue_script('fg-checkout-map', get_template_directory_uri() . '/assets/js/fg-checkout-map.js', array('fg-leaflet'), filemtime(get_template_directory() . '/assets/js/fg-checkout-map.js'), true);
+		wp_enqueue_style('fg-checkout-map', get_template_directory_uri() . '/assets/css/fg-checkout-map.css', array(), fg_asset_version('/assets/css/fg-checkout-map.css'));
+		wp_enqueue_script('fg-checkout-map', get_template_directory_uri() . '/assets/js/fg-checkout-map.js', array('fg-leaflet'), fg_asset_version('/assets/js/fg-checkout-map.js'), true);
 		wp_localize_script('fg-checkout-map', 'FG_DELIVERY', array(
 			'lat' => (string) fg_opt('default_lat', get_theme_mod('fg_default_lat', '35.7219')),
 			'lng' => (string) fg_opt('default_lng', get_theme_mod('fg_default_lng', '51.4697')),
@@ -499,10 +495,7 @@ add_filter('gettext', function($translated, $text, $domain) {
 		'Free shipping' => 'ارسال رایگان',
 		'Shipping' => 'ارسال',
 		'Subtotal' => 'جمع جزء',
-		'Total' => 'مبلغ نهایی',
-		'Proceed to checkout' => 'ادامه و پرداخت',
-		'Update cart' => 'به‌روزرسانی سبد',
-		'Apply coupon' => 'اعمال کد تخفیف',
+		'Total' => 'مبلغ نهایی',		'Apply coupon' => 'اعمال کد تخفیف',
 		'Coupon code' => 'کد تخفیف',
 		'Have a coupon?' => 'کد تخفیف دارید؟',
 		'Click here to enter your code' => 'اینجا کلیک کنید',
@@ -632,8 +625,8 @@ add_action('woocommerce_thankyou', function($order_id){
 	echo '</section>';
 
 	$origin = fg_get_origin_coords();
-	wp_enqueue_style('fg-lux', get_template_directory_uri() . '/assets/css/fg-lux-checkout.css', array(), filemtime(get_template_directory() . '/assets/css/fg-lux-checkout.css'));
-	wp_enqueue_script('fg-track', get_template_directory_uri() . '/assets/js/fg-order-tracking.js', array(), filemtime(get_template_directory() . '/assets/js/fg-order-tracking.js'), true);
+	wp_enqueue_style('fg-lux', get_template_directory_uri() . '/assets/css/fg-lux-checkout.css', array(), fg_asset_version('/assets/css/fg-lux-checkout.css'));
+	wp_enqueue_script('fg-track', get_template_directory_uri() . '/assets/js/fg-order-tracking.js', array(), fg_asset_version('/assets/js/fg-order-tracking.js'), true);
 	wp_localize_script('fg-track', 'FG_TRACK', array(
 		'prep' => $prep,
 		'step' => $step,
@@ -679,7 +672,7 @@ add_filter('woocommerce_checkout_fields', function($fields){
  */
 add_action( 'pre_get_posts', function( $query ) {
     // خروج در صورت ادمین یا نبودن کوئری اصلی
-    if ( is_admin() || ! $query->is_main_query() ) {
+    if ( is_admin() || ! $query->is_main_query() || ! function_exists('is_shop') || ! function_exists('is_product_category') ) {
         return;
     }
     
@@ -703,6 +696,12 @@ add_action( 'pre_get_posts', function( $query ) {
         }
     }
 }, 999 );
+
+/* FG_DISABLE_ADD_TO_CART */
+add_action('init', function () {
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
+    remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
+});
 
 // Add favicon
 function fernosa_add_favicon() {
