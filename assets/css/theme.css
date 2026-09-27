@@ -851,7 +851,6 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
 .fg-intro-video{display:none}
 @media (max-width:767px){
   .fg-intro-video{display:block}
-  .fg-intro-video__media{preload:metadata}
 }
 .menu-category-page{padding:26px 0 8px}
 .menu-category-page h2{margin:0 0 10px;font-size:clamp(19px,4vw,26px);color:#f8f0e2}
