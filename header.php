@@ -39,30 +39,22 @@ if (!defined('ABSPATH')) { exit; }
 
 <div class="header-actions">
       <?php
-        $show_cart    = (bool) get_theme_mod('fernosa_header_show_cart', true);
         $show_account = (bool) get_theme_mod('fernosa_header_show_account', true);
       ?>
 
-      <?php if (class_exists('WooCommerce')): ?>
-        <?php if ($show_cart): ?>
-          <a class="icon-btn cart-btn" href="<?php echo esc_url(wc_get_cart_url()); ?>" aria-label="<?php esc_attr_e('Cart', 'fernosa-gelato'); ?>">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span class="cart-count"><?php echo esc_html(WC()->cart ? WC()->cart->get_cart_contents_count() : 0); ?></span>
-          </a>
-        <?php endif; ?>
-
-        <?php if ($show_account): ?>
+      <?php if ($show_account): ?>
+        <?php if (class_exists('WooCommerce')): ?>
           <a class="icon-btn account-btn" href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" aria-label="<?php esc_attr_e('Account', 'fernosa-gelato'); ?>">
             <i class="fa-regular fa-user"></i>
           </a>
-        <?php endif; ?>
-      <?php else: ?>
-        <?php if ($show_account): ?>
-          <a class="icon-btn account-btn" href="<?php echo esc_url(wp_login_url()); ?>"><i class="fa-regular fa-user"></i></a>
+        <?php else: ?>
+          <a class="icon-btn account-btn" href="<?php echo esc_url(wp_login_url()); ?>" aria-label="<?php esc_attr_e('Login', 'fernosa-gelato'); ?>">
+            <i class="fa-regular fa-user"></i>
+          </a>
         <?php endif; ?>
       <?php endif; ?>
 
-      <button class="icon-btn hamburger" id="hamburgerBtn" aria-label="<?php esc_attr_e('Open menu', 'fernosa-gelato'); ?>">
+      <button class="icon-btn hamburger"/> id="hamburgerBtn" aria-label="<?php esc_attr_e('Open menu', 'fernosa-gelato'); ?>">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
@@ -76,7 +68,6 @@ if (!defined('ABSPATH')) { exit; }
       <?php fernosa_primary_menu(); ?>
       <div class="mobile-quick">
         <?php if (class_exists('WooCommerce')): ?>
-          <a href="<?php echo esc_url(wc_get_cart_url()); ?>"><i class="fa-solid fa-bag-shopping"></i> سبد خرید</a>
           <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>"><i class="fa-regular fa-user"></i> حساب کاربری</a>
         <?php else: ?>
           <a href="<?php echo esc_url(wp_login_url()); ?>"><i class="fa-regular fa-user"></i> ورود</a>
