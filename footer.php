@@ -90,9 +90,8 @@ $social  = function_exists('fernosa_get_social_links') ? fernosa_get_social_link
     </div>
   </div>
 </footer>
+<?php endif; ?>
 
 <?php wp_footer(); ?>
 </body>
 </html>
-
-<?php endif; ?>
