@@ -191,32 +191,6 @@ $wp_customize->add_setting('fernosa_footer_bg', [
         'section' => 'fernosa_header',
         'type' => 'checkbox',
     ]);
-    // Social links
-    $wp_customize->add_section('fernosa_social', [
-        'title' => __('شبکه‌های اجتماعی (فوتر)', 'fernosa-gelato'),
-        'priority' => 33,
-    ]);
-    foreach (['instagram'=>'Instagram','telegram'=>'Telegram','whatsapp'=>'WhatsApp','youtube'=>'YouTube','linkedin'=>'LinkedIn','x'=>'X'] as $k => $label) {
-        $wp_customize->add_setting('fernosa_social_' . $k, [
-            'default' => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ]);
-        $wp_customize->add_control('fernosa_social_' . $k, [
-            'label' => sprintf(__('لینک %s', 'fernosa-gelato'), $label),
-            'section' => 'fernosa_social',
-            'type' => 'url',
-        ]);
-    }
-
-    $wp_customize->add_setting('fernosa_footer_address', [
-        'default' => 'تقاطع سردار جنگلو خیابان مخبری - ضلع جنوب شرقی - فرنوسا',
-        'sanitize_callback' => 'sanitize_text_field',
-    ]);
-    $wp_customize->add_control('fernosa_footer_address', [
-        'label' => __('آدرس فوتر', 'fernosa-gelato'),
-        'section' => 'title_tagline',
-        'type' => 'text',
-    ]);
 
     $wp_customize->add_section('fernosa_contact', [
         'title' => __('اطلاعات تماس (فوتر/تماس با ما)', 'fernosa-gelato'),
