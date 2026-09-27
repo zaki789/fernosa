@@ -16,7 +16,6 @@ if (!defined('ABSPATH')) { exit; }
         </div>
         <div class="divider"></div>
         <a class="btn btn-primary" href="<?php echo esc_url($order->get_checkout_payment_url()); ?>">پرداخت مجدد</a>
-        <a class="btn btn-ghost" href="<?php echo esc_url(wc_get_cart_url()); ?>">بازگشت به سبد</a>
       <?php else: ?>
         <div class="notice-card">
           پرداخت با موفقیت ثبت شد. شماره سفارش: <strong><?php echo esc_html($order->get_order_number()); ?></strong>
