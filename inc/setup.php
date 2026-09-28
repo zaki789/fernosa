@@ -80,6 +80,23 @@ add_action('customize_register', function($wp_customize){
         'settings' => 'fernosa_gold',
     ]));
 
+    foreach ([
+        'fernosa_cream' => ['#F8F0E2', 'رنگ پس‌زمینه اصلی سایت'],
+        'fernosa_text'  => ['#1F2A22', 'رنگ متن اصلی سایت'],
+        'fernosa_white' => ['#FFFFFF', 'رنگ سطح/کارت روشن'],
+    ] as $key => $item) {
+        $wp_customize->add_setting($key, [
+            'default' => $item[0],
+            'sanitize_callback' => 'sanitize_hex_color',
+            'transport' => 'refresh',
+        ]);
+        $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $key, [
+            'label' => __($item[1], 'fernosa-gelato'),
+            'section' => 'fernosa_colors',
+            'settings' => $key,
+        ]));
+    }
+
     // Header / Footer / Accordion colors
     $wp_customize->add_setting('fernosa_header_bg', [
         'default' => '#013a17',
@@ -350,3 +367,30 @@ $wp_customize->add_setting('fernosa_footer_bg', [
 
 
 });
+
+
+/* FG_CUSTOMIZER_PUBLIC_VARS */
+add_action('wp_head', function () {
+    if (is_admin()) return;
+
+    $primary = sanitize_hex_color(get_theme_mod('fernosa_primary', '#013a17')) ?: '#013a17';
+    $gold    = sanitize_hex_color(get_theme_mod('fernosa_gold', '#988c75')) ?: '#988c75';
+    $cream   = sanitize_hex_color(get_theme_mod('fernosa_cream', '#f8f0e2')) ?: '#f8f0e2';
+    $text    = sanitize_hex_color(get_theme_mod('fernosa_text', '#1f2a22')) ?: '#1f2a22';
+    $white   = sanitize_hex_color(get_theme_mod('fernosa_white', '#ffffff')) ?: '#ffffff';
+    $header  = sanitize_hex_color(get_theme_mod('fernosa_header_bg', $primary)) ?: $primary;
+    $header_scrolled = sanitize_hex_color(get_theme_mod('fernosa_header_bg_scrolled', $primary)) ?: $primary;
+    $header_link = sanitize_hex_color(get_theme_mod('fernosa_header_link', $white)) ?: $white;
+    $header_hover = sanitize_hex_color(get_theme_mod('fernosa_header_link_hover', $gold)) ?: $gold;
+    $footer = sanitize_hex_color(get_theme_mod('fernosa_footer_bg', $primary)) ?: $primary;
+    $accordion = sanitize_hex_color(get_theme_mod('fernosa_accordion_accent', $gold)) ?: $gold;
+    $card = (string) get_theme_mod('fg_product_card_bg', 'rgba(255,255,255,.86)');
+    $category = (string) get_theme_mod('fg_category_bg', 'rgba(255,255,255,.62)');
+
+    printf(
+        '<style id="fernosa-customizer-vars">:root{--fg-primary:%1$s;--fg-primary-hover:%1$s;--fg-cream:%2$s;--fg-gold:%3$s;--fg-white:%4$s;--fg-text:%5$s;--fg-header-bg:%6$s;--fg-header-bg-scrolled:%7$s;--fg-header-link:%8$s;--fg-header-link-hover:%9$s;--fg-footer-bg:%10$s;--fg-accordion-accent:%11$s;--fg-product-card-bg:%12$s;--fg-category-bg:%13$s;}</style>',
+        esc_attr($primary), esc_attr($cream), esc_attr($gold), esc_attr($white), esc_attr($text),
+        esc_attr($header), esc_attr($header_scrolled), esc_attr($header_link), esc_attr($header_hover),
+        esc_attr($footer), esc_attr($accordion), esc_attr($card), esc_attr($category)
+    );
+}, 40);
