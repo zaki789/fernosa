@@ -1167,23 +1167,6 @@ button:focus-visible,a:focus-visible,[role="tab"]:focus-visible{
 }
 
 
-/* Customizer-driven public palette */
-:root{
-  --fg-primary:var(--fg-primary,#013A17);
-  --fg-gold:var(--fg-gold,#988C75);
-  --fg-cream:var(--fg-cream,#F8F0E2);
-  --fg-text:var(--fg-text,#1F2A22);
-  --fg-white:var(--fg-white,#FFFFFF);
-  --fg-header-bg:var(--fg-header-bg,#013A17);
-  --fg-header-bg-scrolled:var(--fg-header-bg-scrolled,#013A17);
-  --fg-header-link:var(--fg-header-link,#FFFFFF);
-  --fg-header-link-hover:var(--fg-header-link-hover,#988C75);
-  --fg-footer-bg:var(--fg-footer-bg,#013A17);
-  --fg-accordion-accent:var(--fg-accordion-accent,#988C75);
-  --fg-product-card-bg:var(--fg-product-card-bg,rgba(255,255,255,.86));
-  --fg-category-bg:var(--fg-category-bg,rgba(255,255,255,.62));
-}
-
 /* Hero contrast: image stays visible, foreground always readable */
 .hero{
   color:#fff!important;
