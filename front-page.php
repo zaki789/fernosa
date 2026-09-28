@@ -213,10 +213,10 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
       <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
       <p class="hero-desc"><?php echo esc_html($hero_desc); ?></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#menu" data-scroll="#menu"><i class="fa-solid fa-book-open"></i> مشاهده منو</a>
+        <a class="btn btn-primary" href="#menu" data-scroll="#menu"><svg class="fg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> مشاهده منو</a>
       </div>
       <button class="scroll-down" data-scroll="#menu" aria-label="Scroll down">
-        <i class="fa-solid fa-chevron-down"></i>
+        <svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
   </section>
@@ -292,7 +292,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                 <?php if ($thumb_url): ?>
                   <img class="acc-icon-img" src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($cat->name); ?>" loading="lazy">
                 <?php else: ?>
-                  <i class="fa-solid fa-layer-group"></i>
+                  <svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="14" width="16" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
                 <?php endif; ?>
               </span>
               <span class="acc-title"><?php echo esc_html($cat->name); ?></span>
@@ -384,11 +384,11 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                 <?php if ($thumb_url): ?>
                   <img class="acc-icon-img" src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($cat->name); ?>" loading="lazy">
                 <?php else: ?>
-                  <i class="fa-solid fa-layer-group"></i>
+                  <svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="14" width="16" height="5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
                 <?php endif; ?>
               </span>
               <span class="acc-title"><?php echo esc_html($cat->name); ?></span>
-              <span class="acc-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+              <span class="acc-arrow"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </button>
 
             <div class="accordion-panel">
@@ -462,7 +462,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
         <p class="section-sub">
           از اولین عصاره‌ی قهوه تا آخرین قاشق ژلاتو، ما دنبال «بهترین نسخه»‌ایم. نتیجه؟ یک تجربه‌ی گرم، خوش‌عطر و حسابی شیک.
         </p>
-        <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/about')); ?>"><i class="fa-solid fa-arrow-left"></i> درباره ما</a>
+        <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/about')); ?>"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> درباره ما</a>
       </div>
       <div class="about-media reveal">
         <img src="<?php echo esc_url(FERNOSA_GELATO_URI . '/assets/img/fernosa1.jpg'); ?>" alt="Cafe" loading="lazy">
@@ -476,7 +476,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
         <h3>سفارش یا همکاری؟</h3>
         <p>پیام بدهید؛ سریع پاسخ می‌دهیم.</p>
       </div>
-      <a class="btn btn-primary" href="<?php echo esc_url(home_url('/contact')); ?>"><i class="fa-solid fa-paper-plane"></i> تماس با ما</a>
+      <a class="btn btn-primary" href="<?php echo esc_url(home_url('/contact')); ?>"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-8 18-2.5-7.5L3 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m10.5 13.5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> تماس با ما</a>
     </div>
   </section>
 
@@ -484,7 +484,7 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
   <div class="fg-modal" id="fgModal" aria-hidden="true">
     <div class="fg-modal__overlay" data-fg-close></div>
     <div class="fg-modal__panel" role="dialog" aria-modal="true" aria-label="جزئیات محصول">
-      <button class="fg-modal__close" type="button" data-fg-close aria-label="بستن"><i class="fa-solid fa-xmark"></i></button>
+      <button class="fg-modal__close" type="button" data-fg-close aria-label="بستن"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <div class="fg-modal__media-only">
         <img id="fgModalImg" src="" alt="" loading="eager">
       </div>
