@@ -211,7 +211,6 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
       <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
-      <p class="hero-desc"><?php echo esc_html($hero_desc); ?></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#menu" data-scroll="#menu"><svg class="fg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> مشاهده منو</a>
       </div>
@@ -454,42 +453,6 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
     </div>
 <?php endif; ?>
   </section>
-
-  <section class="about-snippet" id="about">
-    <div class="container about-grid">
-      <div class="about-text reveal">
-        <h2 class="section-title">داستان فرنوسا</h2>
-        <p class="section-sub">
-          از اولین عصاره‌ی قهوه تا آخرین قاشق ژلاتو، ما دنبال «بهترین نسخه»‌ایم. نتیجه؟ یک تجربه‌ی گرم، خوش‌عطر و حسابی شیک.
-        </p>
-        <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/about')); ?>"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> درباره ما</a>
-      </div>
-      <div class="about-media reveal">
-        <img src="<?php echo esc_url(FERNOSA_GELATO_URI . '/assets/img/fernosa1.jpg'); ?>" alt="Cafe" loading="lazy">
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-strip">
-    <div class="container cta-inner">
-      <div class="cta-text">
-        <h3>سفارش یا همکاری؟</h3>
-        <p>پیام بدهید؛ سریع پاسخ می‌دهیم.</p>
-      </div>
-      <a class="btn btn-primary" href="<?php echo esc_url(home_url('/contact')); ?>"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-8-8 18-2.5-7.5L3 11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m10.5 13.5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> تماس با ما</a>
-    </div>
-  </section>
-
-  <!-- Product modal (no page navigation) -->
-  <div class="fg-modal" id="fgModal" aria-hidden="true">
-    <div class="fg-modal__overlay" data-fg-close></div>
-    <div class="fg-modal__panel" role="dialog" aria-modal="true" aria-label="جزئیات محصول">
-      <button class="fg-modal__close" type="button" data-fg-close aria-label="بستن"><svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <div class="fg-modal__media-only">
-        <img id="fgModalImg" src="" alt="" loading="eager">
-      </div>
-    </div>
-  </div>
 
 </main>
 <?php get_footer(); ?>
