@@ -195,23 +195,14 @@ $cats = fernosa_get_menu_categories(20);
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
       <div class="hero-copy reveal">
-        <span class="hero-kicker">FERNOSA GELATO · CAFÉ</span>
+        <span class="hero-kicker">FERNOSA GELATO</span>
         <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
         <p class="hero-desc"><?php echo esc_html($hero_desc); ?></p>
         <div class="hero-actions">
           <a class="btn btn-primary hero-cta" href="#menu" data-scroll="#menu">
-            <svg class="fg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             مشاهده منو
           </a>
-          <a class="btn btn-ghost hero-cta" href="<?php echo esc_url(home_url('/contact/')); ?>">
-            تماس با ما
-          </a>
         </div>
-      </div>
-      <div class="hero-float-card reveal" aria-label="پیشنهاد ویژه امروز">
-        <span class="hero-float-card__label">پیشنهاد ویژه امروز</span>
-        <strong>طعم تازه، تجربه ماندگار</strong>
-        <small>ژلاتو دست‌ساز و قهوه تخصصی فرنوسا</small>
       </div>
       <button class="scroll-down" data-scroll="#menu" aria-label="رفتن به منو">
         <svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
