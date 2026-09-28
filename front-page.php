@@ -214,7 +214,6 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
       <p class="hero-desc"><?php echo esc_html($hero_desc); ?></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#menu" data-scroll="#menu"><i class="fa-solid fa-book-open"></i> مشاهده منو</a>
-        <a class="btn btn-ghost" href="<?php echo esc_url(home_url('/about')); ?>"><i class="fa-solid fa-circle-info"></i> درباره ما</a>
       </div>
       <button class="scroll-down" data-scroll="#menu" aria-label="Scroll down">
         <i class="fa-solid fa-chevron-down"></i>
@@ -323,9 +322,9 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                   $price_html = $p->get_price_html();
               ?>
                 <div class="product-card reveal">
-                  <button class="product-media" data-fg-open-modal data-img="<?php echo esc_url($img_url); ?>" aria-label="<?php echo esc_attr($p->get_name()); ?>">
+                  <div class="product-media" aria-label="<?php echo esc_attr($p->get_name()); ?>">
                     <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($p->get_name()); ?>" loading="lazy">
-                  </button>
+                  </div>
                   <div class="product-body">
                     <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
                     <?php $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18); ?>
@@ -409,13 +408,9 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                       if ($p->get_total_sales() > 20) $badges[] = ['class'=>'badge-hot','text'=>'پرفروش'];
                       $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18);
                   ?>
-                  <div class="product-card reveal" data-product-modal
-                       data-title="<?php echo esc_attr($p->get_name()); ?>"
-                       data-image="<?php echo esc_url($img_full_url); ?>"
-                       data-desc="<?php echo esc_attr($desc); ?>"
-                       data-price="<?php echo esc_attr(wp_strip_all_tags($p->get_price_html())); ?>">
+                  <div class="product-card reveal">
 
-                    <button class="product-media" type="button" aria-label="<?php echo esc_attr($p->get_name()); ?>">
+                    <div class="product-media" aria-label="<?php echo esc_attr($p->get_name()); ?>">
                       <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($p->get_name()); ?>" loading="lazy">
                       <?php if (!empty($badges)): ?>
                         <div class="product-badges">
@@ -424,12 +419,10 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                           <?php endforeach; ?>
                         </div>
                       <?php endif; ?>
-                    </button>
+                    </div>
 
                     <div class="product-body">
-                      <h3 class="product-title">
-                        <button type="button" class="product-title-btn" data-open-modal><?php echo esc_html($p->get_name()); ?></button>
-                      </h3>
+                      <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
                       <p class="product-desc"><?php echo esc_html($desc); ?></p>
                       <div class="product-foot">
                         <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
