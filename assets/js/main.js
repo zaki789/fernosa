@@ -73,81 +73,31 @@
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
-    entries.forEach(ent => {
-      if (ent.isIntersecting) {
-        ent.target.classList.add('is-visible');
-        io.unobserve(ent.target);
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = (!reduceMotion && 'IntersectionObserver' in window)
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if (ent.isIntersecting) {
+            ent.target.classList.add('is-visible');
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
+    : null;
+
+  const observeRevealElements = (root = document) => {
+    root.querySelectorAll('.reveal').forEach(el => {
+      if (reduceMotion) {
+        el.classList.add('is-visible');
+      } else if (io) {
+        io.observe(el);
+      } else {
+        el.classList.add('is-visible');
       }
     });
-  }, { threshold: 0.12 }) : null;
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    if (io) io.observe(el);
-    else el.classList.add('is-visible');
-  });
-
-  // ---- Product modal (no page navigation) ----
-  const modal = document.getElementById('fgModal');
-  const modalImg = document.getElementById('fgModalImg');
-
-  const openModal = (data) => {
-    if (!modal) return;
-    if (modalImg) {
-      modalImg.src = data.image || '';
-      modalImg.alt = data.title || '';
-    }
-
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.documentElement.style.overflow = 'hidden';
   };
-
-  const closeModal = () => {
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.documentElement.style.overflow = '';
-  };
-
-  // Open modal from any element: data-fg-modal-image
-  document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-fg-modal-image]');
-    if (!t) return;
-    e.preventDefault();
-    openModal({
-      title: t.getAttribute('data-title') || '',
-      image: t.getAttribute('data-image') || '',
-    });
-  });
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target.closest('[data-fg-close]')) closeModal();
-    });
-  }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('[data-product-modal]');
-    if (!card) return;
-    // Ignore clicks on add-to-cart buttons/links
-    if (e.target.closest('.add_to_cart_button, .single_add_to_cart_button, .ajax_add_to_cart, form, input, button.btn')) {
-      return;
-    }
-    // Only open when clicking on media or title button
-    const isMedia = e.target.closest('.product-media');
-    const isTitle = e.target.closest('[data-open-modal]');
-    if (!isMedia && !isTitle) return;
-
-    e.preventDefault();
-    openModal({
-      title: card.getAttribute('data-title'),
-      image: card.getAttribute('data-image'),
-    });
-  });
+  observeRevealElements();
+  // Product cards are intentionally static: no quick-view/modal interaction.
   // ---- Lazy load: fetch products in small batches while scrolling ----
   const makeAllVisible = (root) => {
     if (!root) return;
@@ -182,6 +132,7 @@
           const tmp = document.createElement('div');
           tmp.innerHTML = html;
           makeAllVisible(tmp);
+          observeRevealElements(tmp);
           while (tmp.firstChild) {
             const node = tmp.firstChild;
             if (node.nodeType === 1 && node.matches && node.matches('.product-card[data-product-id]')) {
