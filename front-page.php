@@ -205,7 +205,6 @@ $cats = fernosa_get_menu_categories(20);
         <h1>طعم یک تجربه متفاوت</h1>
         <button class="btn btn-primary fg-intro-video__menu" type="button" data-intro-close data-scroll="#menu">مشاهده منو</button>
       </div>
-      <button class="fg-intro-video__skip" type="button" data-intro-close aria-label="بستن ویدئو">رد کردن</button>
     </section>
   <?php endif; ?>
   <?php if ( fg_bool_opt('show_hero', get_theme_mod('fg_show_hero', true)) ) : ?>
