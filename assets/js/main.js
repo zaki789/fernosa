@@ -7,16 +7,6 @@
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('mobileDrawer');
   const closeBtn = document.getElementById('closeDrawerBtn');
-  const introVideo = document.querySelector('.fg-intro-video__media');
-  if (introVideo) {
-    introVideo.addEventListener('ended', () => document.querySelector('.fg-intro-video')?.classList.add('is-done'), { once:true });
-  }
-  const introMenu = document.querySelector('.fg-intro-video__menu');
-  if (introMenu) introMenu.addEventListener('click', () => {
-    document.querySelector('.fg-intro-video')?.remove();
-    document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
   const onScroll = () => {
     if (!header) return;
     const sc = window.scrollY || document.documentElement.scrollTop;
@@ -86,7 +76,10 @@
     : null;
 
   const observeRevealElements = (root = document) => {
-    root.querySelectorAll('.reveal').forEach(el => {
+    root.querySelectorAll('.reveal').forEach((el, index) => {
+      if (el.classList.contains('product-card')) {
+        el.style.transitionDelay = Math.min(index * 55, 330) + 'ms';
+      }
       if (reduceMotion) {
         el.classList.add('is-visible');
       } else if (io) {
