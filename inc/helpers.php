@@ -107,7 +107,7 @@ function fernosa_product_card_html($p): string {
     if ($p->is_on_sale()) $badges[] = ['class'=>'badge-sale','text'=>'تخفیف'];
     if ($p->get_date_created() && (time() - $p->get_date_created()->getTimestamp() < 86400*14)) $badges[] = ['class'=>'badge-new','text'=>'جدید'];
     if (method_exists($p, 'get_total_sales') && $p->get_total_sales() > 20) $badges[] = ['class'=>'badge-hot','text'=>'پرفروش'];
-    $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18);
+    $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 35);
 
     ob_start(); ?>
     <article id="fg-product-<?php echo esc_attr($id); ?>" class="product-card reveal" data-product-id="<?php echo esc_attr($id); ?>">
