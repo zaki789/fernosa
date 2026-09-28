@@ -889,3 +889,7 @@ input:focus, textarea:focus, select:focus{border-color: rgba(152,140,117,.60)}
 .product-card:hover{transform:none!important;box-shadow:0 14px 36px rgba(0,0,0,.14)!important}
 .product-media{display:block!important;width:100%;padding:0;border:0;background:transparent;pointer-events:none;cursor:default!important}
 .product-title-btn{pointer-events:none!important}
+
+/* Local inline SVG icons */
+.fg-icon{width:1.15em;height:1.15em;display:inline-block;flex:0 0 auto;vertical-align:-.2em;color:currentColor}
+.fg-icon--sm{width:1em;height:1em;vertical-align:-.12em}
