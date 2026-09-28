@@ -1574,3 +1574,24 @@ button:focus-visible,a:focus-visible,[role="tab"]:focus-visible{
   .product-card,.product-body,.product-media img,.product-media::after{transition:none!important}
   .scroll-down{animation:none!important}
 }
+
+
+/* Hero refinement — minimal composition */
+.hero-inner{align-items:flex-start!important;justify-content:center!important}
+.hero-copy{max-width:620px!important;margin-inline-start:0!important}
+.hero-kicker{font-size:.72rem!important;letter-spacing:.16em!important;opacity:.78}
+.hero-title{margin-top:10px!important;margin-bottom:12px!important;max-width:600px}
+.hero-desc{max-width:520px!important;margin-bottom:22px!important}
+.hero-actions{margin-top:0!important}
+.hero .btn-primary{min-width:150px}
+@media (min-width:981px){
+  .hero-overlay{
+    background:linear-gradient(90deg,rgba(1,58,23,.82) 0%,rgba(1,58,23,.48) 48%,rgba(1,58,23,.08) 100%)!important;
+  }
+}
+@media (max-width:767px){
+  .hero-inner{align-items:center!important;text-align:center}
+  .hero-copy{max-width:100%!important}
+  .hero-desc{max-width:430px!important}
+  .hero-actions{justify-content:center}
+}
