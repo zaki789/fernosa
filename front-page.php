@@ -319,23 +319,29 @@ $cats = fernosa_get_menu_categories(20);
                   $img_url = $img ? $img[0] : wc_placeholder_img_src('medium');
                   $price_html = $p->get_price_html();
               ?>
-                <div class="product-card reveal">
-                  <div class="product-media" aria-label="<?php echo esc_attr($p->get_name()); ?>">
+                <?php
+                  $badges = [];
+                  if ($p->is_on_sale()) $badges[] = ['class'=>'badge-sale','text'=>'تخفیف'];
+                  if ($p->get_date_created() && (time() - $p->get_date_created()->getTimestamp() < 86400*14)) $badges[] = ['class'=>'badge-new','text'=>'جدید'];
+                  if (method_exists($p, 'get_total_sales') && $p->get_total_sales() > 20) $badges[] = ['class'=>'badge-hot','text'=>'پرفروش'];
+                  $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18);
+                ?>
+                <article id="fg-product-<?php echo esc_attr($pid); ?>" class="product-card reveal" data-product-id="<?php echo esc_attr($pid); ?>">
+                  <a class="product-media" href="<?php echo esc_url(get_permalink($pid)); ?>" aria-label="<?php echo esc_attr($p->get_name()); ?>">
                     <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($p->get_name()); ?>" loading="lazy">
-                  </div>
+                    <?php if (!empty($badges)): ?><div class="product-badges"><?php foreach ($badges as $b): ?><span class="pbadge <?php echo esc_attr($b['class']); ?>"><?php echo esc_html($b['text']); ?></span><?php endforeach; ?></div><?php endif; ?>
+                  </a>
                   <div class="product-body">
-                    <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
-                    <?php $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18); ?>
-                    <?php if ($desc !== ''): ?>
-                      <p class="product-desc"><?php echo esc_html($desc); ?></p>
-                    <?php endif; ?>
-                    <div class="product-price"><?php echo wp_kses_post($price_html); ?></div>
-
-                    <div class="product-actions">
+                    <div class="product-copy">
+                      <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
+                      <?php if ($desc !== ''): ?><p class="product-desc"><?php echo esc_html($desc); ?></p><?php endif; ?>
+                      <div class="product-foot"><div class="price"><?php echo wp_kses_post($price_html); ?></div></div>
                     </div>
-
+                    <a class="product-detail" href="<?php echo esc_url(get_permalink($pid)); ?>" aria-label="مشاهده جزئیات <?php echo esc_attr($p->get_name()); ?>">
+                      <span aria-hidden="true">+</span><span>مشاهده جزئیات</span>
+                    </a>
                   </div>
-                </div>
+                </article>
               <?php endforeach; endif; ?>
             </div>
             <?php
