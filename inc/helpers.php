@@ -101,25 +101,17 @@ function fernosa_get_social_links(): array {
 function fernosa_product_card_html($p): string {
     if (!$p || !is_object($p) || !method_exists($p, 'get_id')) return '';
     $id = (int) $p->get_id();
-
     $img = wp_get_attachment_image_src($p->get_image_id(), 'large');
     $img_url = $img ? $img[0] : '';
-
-    $img_full = wp_get_attachment_image_src($p->get_image_id(), 'full');
-    $img_full_url = $img_full ? $img_full[0] : $img_url;
-
     $badges = [];
     if ($p->is_on_sale()) $badges[] = ['class'=>'badge-sale','text'=>'تخفیف'];
     if ($p->get_date_created() && (time() - $p->get_date_created()->getTimestamp() < 86400*14)) $badges[] = ['class'=>'badge-new','text'=>'جدید'];
     if (method_exists($p, 'get_total_sales') && $p->get_total_sales() > 20) $badges[] = ['class'=>'badge-hot','text'=>'پرفروش'];
-
     $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18);
 
     ob_start(); ?>
-    <div id="fg-product-<?php echo esc_attr($id); ?>" class="product-card reveal" data-product-id="<?php echo esc_attr($id); ?>" data-product-modal
-         data-title="<?php echo esc_attr($p->get_name()); ?>"
-         data-image="<?php echo esc_url($img_full_url); ?>">
-      <button class="product-media" type="button" aria-label="<?php echo esc_attr($p->get_name()); ?>">
+    <article id="fg-product-<?php echo esc_attr($id); ?>" class="product-card reveal" data-product-id="<?php echo esc_attr($id); ?>">
+      <a class="product-media" href="<?php echo esc_url(get_permalink($id)); ?>" aria-label="<?php echo esc_attr($p->get_name()); ?>">
         <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($p->get_name()); ?>" loading="lazy">
         <?php if (!empty($badges)): ?>
           <div class="product-badges">
@@ -128,18 +120,18 @@ function fernosa_product_card_html($p): string {
             <?php endforeach; ?>
           </div>
         <?php endif; ?>
-      </button>
-
+      </a>
       <div class="product-body">
-        <h3 class="product-title">
-          <button type="button" class="product-title-btn" data-open-modal><?php echo esc_html($p->get_name()); ?></button>
-        </h3>
-        <p class="product-desc"><?php echo esc_html($desc); ?></p>
-        <div class="product-foot">
-          <div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div>
+        <div class="product-copy">
+          <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
+          <?php if ($desc !== ''): ?><p class="product-desc"><?php echo esc_html($desc); ?></p><?php endif; ?>
+          <div class="product-foot"><div class="price"><?php echo wp_kses_post($p->get_price_html()); ?></div></div>
         </div>
+        <a class="product-detail" href="<?php echo esc_url(get_permalink($id)); ?>" aria-label="مشاهده جزئیات <?php echo esc_attr($p->get_name()); ?>">
+          <span aria-hidden="true">+</span><span>مشاهده جزئیات</span>
+        </a>
       </div>
-    </div>
+    </article>
     <?php
     return (string) ob_get_clean();
 }
