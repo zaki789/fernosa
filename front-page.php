@@ -203,7 +203,6 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
         <h1>طعم یک تجربه متفاوت</h1>
         <button class="btn btn-primary fg-intro-video__menu" type="button">مشاهده منو</button>
       </div>
-      <button class="fg-intro-video__skip" type="button" aria-label="بستن ویدئوی معرفی">×</button>
     </section>
   <?php endif; ?>
 
@@ -329,6 +328,10 @@ $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
                   </button>
                   <div class="product-body">
                     <h3 class="product-title"><?php echo esc_html($p->get_name()); ?></h3>
+                    <?php $desc = wp_trim_words(wp_strip_all_tags($p->get_short_description() ?: $p->get_description()), 18); ?>
+                    <?php if ($desc !== ''): ?>
+                      <p class="product-desc"><?php echo esc_html($desc); ?></p>
+                    <?php endif; ?>
                     <div class="product-price"><?php echo wp_kses_post($price_html); ?></div>
 
                     <div class="product-actions">
