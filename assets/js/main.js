@@ -3,6 +3,15 @@
  * لود تنبل محصولات و نمای تب/کارت دسته‌بندی‌ها.
  */
 (() => {
+  const introVideo = document.getElementById('fgIntroVideo');
+  if (introVideo) {
+    introVideo.querySelectorAll('[data-intro-close]').forEach((button) => {
+      button.addEventListener('click', () => {
+        introVideo.classList.add('is-done');
+        window.setTimeout(() => introVideo.remove(), 500);
+      });
+    });
+  }
   const header = document.getElementById('siteHeader');
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const drawer = document.getElementById('mobileDrawer');
