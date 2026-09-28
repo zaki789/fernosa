@@ -188,33 +188,32 @@ function fernosa_get_products_count_for_cat(int $term_id): int {
 $cats = fernosa_get_menu_categories(24);
 $menu_view = get_theme_mod('fernosa_menu_view', 'cards');
 $cats = fernosa_get_menu_categories(20);
-$intro_video_id = absint(get_theme_mod('fernosa_intro_video', 0));
-$intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
 ?>
 <main class="site-main">
-  <?php if ($intro_video): ?>
-    <section class="fg-intro-video" aria-label="معرفی فرنوسا">
-      <video class="fg-intro-video__media" autoplay muted playsinline preload="metadata" poster="<?php echo esc_url($hero_bg); ?>">
-        <source src="<?php echo esc_url($intro_video); ?>" type="video/mp4">
-      </video>
-      <div class="fg-intro-video__overlay"></div>
-      <div class="fg-intro-video__content container">
-        <span class="fg-kicker">FERNOSA GELATO</span>
-        <h1>طعم یک تجربه متفاوت</h1>
-        <button class="btn btn-primary fg-intro-video__menu" type="button">مشاهده منو</button>
-      </div>
-    </section>
-  <?php endif; ?>
-
   <?php if ( fg_bool_opt('show_hero', get_theme_mod('fg_show_hero', true)) ) : ?>
-<section class="hero" style="background-image:url('<?php echo esc_url($hero_bg); ?>');">
+  <section class="hero" style="background-image:url('<?php echo esc_url($hero_bg); ?>');">
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
-      <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#menu" data-scroll="#menu"><svg class="fg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> مشاهده منو</a>
+      <div class="hero-copy reveal">
+        <span class="hero-kicker">FERNOSA GELATO · CAFÉ</span>
+        <h1 class="hero-title"><?php echo esc_html($hero_title); ?></h1>
+        <p class="hero-desc"><?php echo esc_html($hero_desc); ?></p>
+        <div class="hero-actions">
+          <a class="btn btn-primary hero-cta" href="#menu" data-scroll="#menu">
+            <svg class="fg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-14h8m-8 4h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            مشاهده منو
+          </a>
+          <a class="btn btn-ghost hero-cta" href="<?php echo esc_url(home_url('/contact/')); ?>">
+            تماس با ما
+          </a>
+        </div>
       </div>
-      <button class="scroll-down" data-scroll="#menu" aria-label="Scroll down">
+      <div class="hero-float-card reveal" aria-label="پیشنهاد ویژه امروز">
+        <span class="hero-float-card__label">پیشنهاد ویژه امروز</span>
+        <strong>طعم تازه، تجربه ماندگار</strong>
+        <small>ژلاتو دست‌ساز و قهوه تخصصی فرنوسا</small>
+      </div>
+      <button class="scroll-down" data-scroll="#menu" aria-label="رفتن به منو">
         <svg class="fg-icon fg-icon--sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
