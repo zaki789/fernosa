@@ -190,6 +190,24 @@ $menu_view = get_theme_mod('fernosa_menu_view', 'cards');
 $cats = fernosa_get_menu_categories(20);
 ?>
 <main class="site-main">
+  <?php
+  $intro_video_id = absint(get_theme_mod('fernosa_intro_video', 0));
+  $intro_video = $intro_video_id ? wp_get_attachment_url($intro_video_id) : '';
+  ?>
+  <?php if ($intro_video): ?>
+    <section class="fg-intro-video" id="fgIntroVideo" aria-label="معرفی فرنوسا">
+      <video class="fg-intro-video__media" autoplay muted playsinline preload="metadata" poster="<?php echo esc_url($hero_bg); ?>">
+        <source src="<?php echo esc_url($intro_video); ?>" type="video/mp4">
+      </video>
+      <div class="fg-intro-video__overlay"></div>
+      <div class="fg-intro-video__content container">
+        <span class="fg-kicker">FERNOSA GELATO</span>
+        <h1>طعم یک تجربه متفاوت</h1>
+        <button class="btn btn-primary fg-intro-video__menu" type="button" data-intro-close data-scroll="#menu">مشاهده منو</button>
+      </div>
+      <button class="fg-intro-video__skip" type="button" data-intro-close aria-label="بستن ویدئو">رد کردن</button>
+    </section>
+  <?php endif; ?>
   <?php if ( fg_bool_opt('show_hero', get_theme_mod('fg_show_hero', true)) ) : ?>
   <section class="hero" style="background-image:url('<?php echo esc_url($hero_bg); ?>');">
     <div class="hero-overlay"></div>
